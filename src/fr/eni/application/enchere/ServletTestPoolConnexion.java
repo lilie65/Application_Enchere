@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 /**
  * Servlet implementation class ServletTestPoolConnexion
  */
-@WebServlet("Application_Enchere/ServletTestPoolConnexion")
+@WebServlet("/ServletTestPoolConnexion")
 public class ServletTestPoolConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,7 +49,6 @@ public class ServletTestPoolConnexion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
