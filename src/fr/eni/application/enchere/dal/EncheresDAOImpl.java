@@ -1,11 +1,9 @@
 package fr.eni.application.enchere.dal;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 import fr.eni.application.enchere.BusinessException;
 import fr.eni.application.enchere.bo.Enchere;

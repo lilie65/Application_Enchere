@@ -1,7 +1,7 @@
 package fr.eni.application.enchere.bo;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 public class Enchere {
 	private int identifiantEnchere;
@@ -42,7 +42,7 @@ public class Enchere {
 
 	@Override
 	public String toString() {
-		return "identifiantEnchere"+identifiantEnchere + "Date Enchère" + dateEnchere + "Montant Enchère" + montantEnchere;
+		return "identifiantEnchere"+identifiantEnchere + "Date Enchere" + dateEnchere + "Montant Enchere" + montantEnchere;
 	}
 
 }
