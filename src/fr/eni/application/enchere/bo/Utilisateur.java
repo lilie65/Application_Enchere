@@ -1,6 +1,6 @@
 package fr.eni.application.enchere.bo;
 
-public class Utilisateurs {
+public class Utilisateur {
 	private int noUtilisateur;
 	
 	private String pseudo;
@@ -25,7 +25,7 @@ public class Utilisateurs {
 
 	private boolean admnistrateur;
 	
-	public Utilisateurs(String pseudo, String nom, String prenom, String email, int telephone, String rue,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, int telephone, String rue,
 			int codePostal, String ville, String motDePasse, int credit, boolean admnistrateur) {
 		super();
 		this.pseudo = pseudo;
@@ -39,6 +39,11 @@ public class Utilisateurs {
 		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.admnistrateur = admnistrateur;
+	}
+
+
+	public Utilisateur() {
+		// TODO Auto-generated constructor stub
 	}
 
 
@@ -143,7 +148,7 @@ public class Utilisateurs {
 	public String toString() {
 		return "pseudo " + pseudo + " nom " + nom + " prenom " + prenom + " email" + email + " telephone " + telephone
 				+ " rue " + rue + " codePostal " + codePostal + "ville " + ville + "mot de passe " + motDePasse
-				+ "crédit " + credit;
+				+ "crï¿½dit " + credit;
 
 	}
 

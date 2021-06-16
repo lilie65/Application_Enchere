@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import fr.eni.application.enchere.BusinessException;
 import fr.eni.application.enchere.bll.CodesResultat;
 import fr.eni.application.enchere.bo.Enchere;
-import fr.eni.application.enchere.bo.Utilisateurs;
+import fr.eni.application.enchere.bo.Utilisateur;
 
 public class EncheresDAOImpl implements EncheresDAO {
 	private static final String INSERT = "INSERT INTO AVIS(description, note) VALUES(?,?);";
@@ -44,7 +44,7 @@ public class EncheresDAOImpl implements EncheresDAO {
 	}
 
 	@Override
-	public Utilisateurs getUtilisateurs(int noUtilisateur) {
+	public Utilisateur getUtilisateurs(int noUtilisateur) {
 	
 		return null;
 	}
