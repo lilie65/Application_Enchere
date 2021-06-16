@@ -3,7 +3,7 @@ package fr.eni.application.enchere.bo;
 
 public class Retrait {
 	
-	private String rue;
+	private String rue; 
 	
 	private String codePostal;
 	
