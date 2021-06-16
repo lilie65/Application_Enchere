@@ -10,5 +10,5 @@ public interface EncheresDAO {
 		
 	public Utilisateurs getUtilisateurs(int noUtilisateur);
 
-	void insert(Utilisateurs utilisateurs) throws BusinessException;
+	
 }

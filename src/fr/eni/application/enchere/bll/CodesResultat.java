@@ -1,9 +1,9 @@
-package fr.eni.application.enchere.dal;
+package fr.eni.application.enchere.bll;
 
 /**
  * Les codes disponibles sont entre 10000 et 19999
  */
-public abstract class CodesResultatDAL {
+public abstract class CodesResultat {
 	
 	/**
 	 * Echec général quand tentative d'ajouter un objet null

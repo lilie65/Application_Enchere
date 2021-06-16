@@ -6,17 +6,18 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 
 import fr.eni.application.enchere.BusinessException;
+import fr.eni.application.enchere.bll.CodesResultat;
 import fr.eni.application.enchere.bo.Enchere;
 import fr.eni.application.enchere.bo.Utilisateurs;
 
-public abstract class EncheresDAOImpl implements EncheresDAO {
+public class EncheresDAOImpl implements EncheresDAO {
 	private static final String INSERT = "INSERT INTO AVIS(description, note) VALUES(?,?);";
 
 	@Override
 	public void insert(Enchere enchere) throws BusinessException {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultat.INSERT_OBJET_NULL);
 			throw new BusinessException();
 		}
 
@@ -34,9 +35,9 @@ public abstract class EncheresDAOImpl implements EncheresDAO {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			if (e.getMessage().contains("CK_AVIS_note")) {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
+				businessException.ajouterErreur(CodesResultat.INSERT_AVIS_NOTE_ECHEC);
 			} else {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultat.INSERT_OBJET_ECHEC);
 			}
 			throw businessException;
 		}
@@ -44,7 +45,7 @@ public abstract class EncheresDAOImpl implements EncheresDAO {
 
 	@Override
 	public Utilisateurs getUtilisateurs(int noUtilisateur) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
