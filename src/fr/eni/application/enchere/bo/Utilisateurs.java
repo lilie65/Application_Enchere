@@ -1,6 +1,7 @@
 package fr.eni.application.enchere.bo;
 
 public class Utilisateurs {
+	private int noUtilisateur;
 	
 	private String pseudo;
 	
@@ -128,6 +129,15 @@ public class Utilisateurs {
 	public void setAdmnistrateur(boolean admnistrateur) {
 		this.admnistrateur = admnistrateur;
 	}
+	
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+
+
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
 
 	@Override
 	public String toString() {
@@ -136,4 +146,5 @@ public class Utilisateurs {
 				+ "crédit " + credit;
 
 	}
+
 }
