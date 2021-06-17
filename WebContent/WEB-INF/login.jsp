@@ -26,8 +26,7 @@
        <label for="mdpoublie"><a href="#">Mot de passe oublié</a></label>
          <br />
         <br />
-       <a href="#" ><input type="submit" value ="Créer un compte" /></a>
-   </p>
+       <a href="#" ><input type="submit" value ="Créer un compte" /></a></p>
 </form>
 </body>
 </html>
