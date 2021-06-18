@@ -1,10 +1,7 @@
-#formulaire {
-width: 450px;
+#formulaire{
+	
 }
-#formulaire div {
-text-align: right;
-}
-#gauche {
-float: left;
-width: 50%;
+.flexbox{
+	display:flex;
+	 
 }

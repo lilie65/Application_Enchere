@@ -1,8 +1,9 @@
 package fr.eni.application.enchere.dal;
 
 import fr.eni.application.enchere.BusinessException;
-import fr.eni.application.enchere.bo.Utilisateur;
+import fr.eni.application.enchere.bo.UtilisateurBO;
 
 public interface UtilisateursDAO {
-	public void insert(Utilisateur utilisateurs) throws BusinessException;
+	public void insert(UtilisateurBO utilisateurs) throws BusinessException;
+	public UtilisateurBO select(int idUtilisateur)throws BusinessException;
 }

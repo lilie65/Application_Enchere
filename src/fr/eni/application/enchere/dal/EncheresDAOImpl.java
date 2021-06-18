@@ -8,13 +8,13 @@ import java.sql.Timestamp;
 import fr.eni.application.enchere.BusinessException;
 import fr.eni.application.enchere.bll.CodesResultat;
 import fr.eni.application.enchere.bo.Enchere;
-import fr.eni.application.enchere.bo.Utilisateur;
+import fr.eni.application.enchere.bo.UtilisateurBO;
 
 public class EncheresDAOImpl implements EncheresDAO {
 	private static final String INSERT = "INSERT INTO AVIS(description, note) VALUES(?,?);";
 
 	@Override
-	public void insert(Enchere enchere) throws BusinessException {
+	public int insert(Enchere enchere) throws BusinessException {
 		if (enchere == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultat.INSERT_OBJET_NULL);
@@ -34,17 +34,19 @@ public class EncheresDAOImpl implements EncheresDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			if (e.getMessage().contains("CK_AVIS_note")) {
-				businessException.ajouterErreur(CodesResultat.INSERT_AVIS_NOTE_ECHEC);
+			if (e.getMessage().contains("CK_UTILSATEUR_note")) {
+				businessException.ajouterErreur(CodesResultat.INSERT_UTILISATEUR_NOTE_ECHEC);
+				businessException.ajouterErreur(CodesResultat.INSERT_UTILISATEUR_NOTE_ECHEC);
 			} else {
 				businessException.ajouterErreur(CodesResultat.INSERT_OBJET_ECHEC);
 			}
-			throw businessException;
+			return CodesResultat.INSERT_OBJET_ECHEC;
 		}
+		return 0;
 	}
 
 	@Override
-	public Utilisateur getUtilisateurs(int noUtilisateur) {
+	public UtilisateurBO getUtilisateurs(int noUtilisateur) {
 	
 		return null;
 	}

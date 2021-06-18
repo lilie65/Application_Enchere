@@ -1,6 +1,6 @@
 package fr.eni.application.enchere.bo;
 
-public class Utilisateur {
+public class UtilisateurBO {
 	private int noUtilisateur;
 	
 	private String pseudo;
@@ -25,7 +25,7 @@ public class Utilisateur {
 
 	private boolean admnistrateur;
 	
-	public Utilisateur(String pseudo, String nom, String prenom, String email, int telephone, String rue,
+	public UtilisateurBO(String pseudo, String nom, String prenom, String email, int telephone, String rue,
 			int codePostal, String ville, String motDePasse, int credit, boolean admnistrateur) {
 		super();
 		this.pseudo = pseudo;
@@ -42,7 +42,7 @@ public class Utilisateur {
 	}
 
 
-	public Utilisateur() {
+	public UtilisateurBO() {
 		// TODO Auto-generated constructor stub
 	}
 
