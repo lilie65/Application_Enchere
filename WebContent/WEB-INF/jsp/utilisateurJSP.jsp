@@ -16,10 +16,7 @@
 	%>
 
 	<h2>L'utilisateur :</h2>
-	<p>
-		id de l'utilisateur :
-		<%=utilisateur.getNoUtilisateur()%>
-	</p>
+	
 	<p>
 		Nom de l'utilisateur :
 		<%=utilisateur.getNom()%>

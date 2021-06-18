@@ -1,7 +1,14 @@
 #formulaire{
 	
 }
-.flexbox{
+form{
 	display:flex;
-	 
+	 justify-content: center;
+}
+.form-formulaire{
+	flex-direction: column;
+}
+.form-flex{
+	display:flex;
+	justify-content: space-between;
 }

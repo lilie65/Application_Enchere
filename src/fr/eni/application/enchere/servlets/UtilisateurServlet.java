@@ -44,7 +44,7 @@ public class UtilisateurServlet extends HttpServlet {
 
 		request.setAttribute("utilisateur", utilisateur);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/utilisateurJSP.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Utilisateur.jsp");
 		rd.forward(request, response);
 	}
 

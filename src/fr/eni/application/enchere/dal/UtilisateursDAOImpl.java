@@ -13,7 +13,8 @@ import fr.eni.application.enchere.bo.UtilisateurBO;
 public class UtilisateursDAOImpl implements UtilisateursDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?, ?,?,?,?,?,?,?,?);";
 	private static final String SELECT = "select no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur from utilisateurs where no_utilisateur= ";
-
+	private static final String selectByPseudo="select no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur from utilisateurs where pseudo = ";
+	
 	@Override
 	public UtilisateurBO select(int idUtilisateur) throws BusinessException {
 		if (idUtilisateur < 1) {
@@ -88,6 +89,39 @@ public class UtilisateursDAOImpl implements UtilisateursDAO {
 	public void UtilisateurBO() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public UtilisateurBO selectByPseudo(String pseudo) throws BusinessException {
+		if (pseudo ==null || pseudo.trim().isEmpty() ) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultat.INSERT_OBJET_NULL);
+			throw new BusinessException();
+		}
+		UtilisateurBO utilisateur = new UtilisateurBO();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			java.sql.Statement pstmt = cnx.createStatement();
+			ResultSet rs = pstmt.executeQuery(selectByPseudo + "'" +pseudo+"'");
+
+			if (rs.next()) {
+				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getInt("telephone"));
+				utilisateur.setRue(rs.getString("nom"));
+				utilisateur.setCodePostal(rs.getInt("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				utilisateur.setCredit(rs.getInt("credit"));
+				utilisateur.setAdmnistrateur(rs.getBoolean("administrateur"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return utilisateur;
 	}
 
 }
