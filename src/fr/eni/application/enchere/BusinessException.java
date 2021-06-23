@@ -3,37 +3,34 @@ package fr.eni.application.enchere;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusinessException extends Exception{
+public class BusinessException extends Exception {
 	private static final long serialVersionUID = 1L;
-private List<Integer> listeCodesErreur;
-	
+	private List<String> listeCodesErreur;
+
 	public BusinessException() {
 		super();
-		this.listeCodesErreur=new ArrayList<>();
+		this.listeCodesErreur = new ArrayList<>();
 	}
-	
+
+	public BusinessException(String message) {
+		super(message);
+	}
+
 	/**
 	 * 
-	 * @param code Code de l'erreur. Doit avoir un message associé dans un fichier properties.
+	 * @param code Code de l'erreur. Doit avoir un message associé dans un fichier
+	 *             properties.
 	 */
-	public void ajouterErreur(int code)
-	{
-		if(!this.listeCodesErreur.contains(code))
-		{
-			this.listeCodesErreur.add(code);
-		}
+	public void ajouterErreur(String message) {
+		listeCodesErreur.add(message);
 	}
-	
-	public boolean hasErreurs()
-	{
-		return this.listeCodesErreur.size()>0;
+
+	public boolean hasErreurs() {
+		return this.listeCodesErreur.size() > 0;
 	}
-	
-	public List<Integer> getListeCodesErreur()
-	{
+
+	public List<String> getListeCodesErreur() {
 		return this.listeCodesErreur;
 	}
 
 }
-
-

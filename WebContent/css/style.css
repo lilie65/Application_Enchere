@@ -4,11 +4,25 @@
 form{
 	display:flex;
 	 justify-content: center;
+	 
 }
-.form-formulaire{
-	flex-direction: column;
-}
-.form-flex{
+.flexbox{
 	display:flex;
 	justify-content: space-between;
+	margin:10px;
+}
+.orientation{
+	width: auto;
+}
+h2{
+	text-align: center;
+}
+input{
+	 height: 20px;
+  	width: 130px;
+
+}
+.button{
+	width:170px;
+	height: 40px;
 }

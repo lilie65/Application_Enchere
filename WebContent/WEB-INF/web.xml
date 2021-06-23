@@ -9,5 +9,13 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+		<servlet-name>profil</servlet-name>
+		<jsp-file>/WEB-INF/jsp/profil.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>profil</servlet-name>
+		<url-pattern>/monProfil</url-pattern>
+	</servlet-mapping>
   
 </web-app>

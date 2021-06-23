@@ -1,32 +1,39 @@
 package fr.eni.application.enchere.bo;
 
-public class UtilisateurBO {
+import java.io.Serializable;
+
+public class UtilisateurBO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private String identifiant;
+
 	private int noUtilisateur;
-	
+
 	private String pseudo;
-	
+
 	private String nom;
-	
+
 	private String prenom;
-	
+
 	private String email;
-	
+
 	private int telephone;
-	
+
 	private String rue;
-	
+
 	private int codePostal;
-	
+
 	private String ville;
-	
+
 	private String motDePasse;
-	
-	private int credit;
+
+	private int credit=300;
 
 	private boolean admnistrateur;
-	
+
 	public UtilisateurBO(String pseudo, String nom, String prenom, String email, int telephone, String rue,
-			int codePostal, String ville, String motDePasse, int credit, boolean admnistrateur) {
+			int codePostal, String ville, String motDePasse) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -41,11 +48,17 @@ public class UtilisateurBO {
 		this.admnistrateur = admnistrateur;
 	}
 
-
 	public UtilisateurBO() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getIdentifiant() {
+		return identifiant;
+	}
+
+	public void setIdentifiant(String identifiant) {
+		this.identifiant = identifiant;
+	}
 
 	public String getPseudo() {
 		return pseudo;
@@ -134,11 +147,10 @@ public class UtilisateurBO {
 	public void setAdmnistrateur(boolean admnistrateur) {
 		this.admnistrateur = admnistrateur;
 	}
-	
+
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
-
 
 	public void setNoUtilisateur(int noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
@@ -148,7 +160,7 @@ public class UtilisateurBO {
 	public String toString() {
 		return "pseudo " + pseudo + " nom " + nom + " prenom " + prenom + " email" + email + " telephone " + telephone
 				+ " rue " + rue + " codePostal " + codePostal + "ville " + ville + "mot de passe " + motDePasse
-				+ "cr�dit " + credit;
+				+ "credit " + credit;
 
 	}
 

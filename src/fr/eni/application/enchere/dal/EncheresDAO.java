@@ -6,7 +6,7 @@ import fr.eni.application.enchere.bo.UtilisateurBO;
 
 public interface EncheresDAO {
 
-	public int insert (Enchere enchere)throws BusinessException;
+	public void insert (Enchere enchere)throws BusinessException;
 		
 	public UtilisateurBO getUtilisateurs(int noUtilisateur);
 

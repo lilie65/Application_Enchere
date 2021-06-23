@@ -12,7 +12,7 @@
 
 	<%
 		
-		UtilisateurBO utilisateur = (UtilisateurBO) request.getAttribute("utilisateur");
+		UtilisateurBO utilisateur = (UtilisateurBO) session.getAttribute("sessionUtilisateur");
 	%>
 
 	<h2>L'utilisateur :</h2>

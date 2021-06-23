@@ -6,5 +6,6 @@ import fr.eni.application.enchere.bo.UtilisateurBO;
 public interface UtilisateursDAO {
 	public void insert(UtilisateurBO utilisateurs) throws BusinessException;
 	public UtilisateurBO select(int idUtilisateur)throws BusinessException;
-	public UtilisateurBO selectByPseudo(String pseudo)throws BusinessException;
+	UtilisateurBO verifConnection(String pseudoEmail, String mdp) throws BusinessException;
+	
 }
