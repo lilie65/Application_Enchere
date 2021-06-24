@@ -60,7 +60,10 @@
 							<a href="/Web-inf/jsp/passOublier.jsp">Mot de passe oublié</a>
 						</div>
 					</div>
-					<c:out value="${error}" />
+					<c:forEach items="${errors}" var="v">
+			<c:out value="${error}">${v}</c:out>
+			<br>
+		</c:forEach>
 				</fieldset>
 			</div>
 		</form>

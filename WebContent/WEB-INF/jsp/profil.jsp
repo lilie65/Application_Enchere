@@ -111,7 +111,7 @@
 					type="submit" value="Annuler" /></a>
 			</div>
 			<c:forEach items="${errors}" var="v">
-			<c:out value="${pseudo}">${v}</c:out>
+			<c:out value="${error}">${v}</c:out>
 			<br>
 		</c:forEach>
 		</div>

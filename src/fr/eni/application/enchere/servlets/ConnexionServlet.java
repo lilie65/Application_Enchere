@@ -1,6 +1,7 @@
 package fr.eni.application.enchere.servlets;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,12 +58,12 @@ public class ConnexionServlet extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateurJSP.jsp").forward(request, response);
 			}else {
 				// si l'utilisateur est null, cela veut dire qu'il y a une erreur d'autentification
-				request.setAttribute("error", "nom d'utilisateur ou mot de  passe incorrecte");
+				request.setAttribute("errors", Arrays.asList("nom d'utilisateur ou mot de  passe incorrecte"));
 				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 			}
 				
 		} catch (BusinessException e) {
-			request.setAttribute("error", "nom d'utilisateur ou mot de  passe incorrecte");
+			request.setAttribute("errors", e.getListeCodesErreur());
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 

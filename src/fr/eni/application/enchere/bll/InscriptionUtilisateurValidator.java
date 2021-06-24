@@ -17,7 +17,7 @@ public class InscriptionUtilisateurValidator {
 	}
 
 	public void validerUtilisateurBo(UtilisateurBO utilisateur) throws BusinessException {
-		
+
 		BusinessException exception = new BusinessException();
 
 		this.validerPseudo(utilisateur, exception);
@@ -31,8 +31,8 @@ public class InscriptionUtilisateurValidator {
 		this.validerMotDePasse(utilisateur, exception);
 
 		if (!exception.getListeCodesErreur().isEmpty()) {
-			throw exception;	
-		} 
+			throw exception;
+		}
 		this.utilisateurDAO.insert(utilisateur);
 	}
 
@@ -53,7 +53,7 @@ public class InscriptionUtilisateurValidator {
 	}
 
 	private void validerTelephone(UtilisateurBO utilisateur, BusinessException exception) {
-		if (utilisateur.getTelephone() > 1000000000 ){
+		if (utilisateur.getTelephone() > 1000000000) {
 			exception.ajouterErreur("Vous devez entrer votre numéros de téléphone");
 		}
 	}
@@ -68,7 +68,7 @@ public class InscriptionUtilisateurValidator {
 
 	private void validerEmail(UtilisateurBO utilisateur, BusinessException exception) {
 		validerString(utilisateur.getEmail(), 50, exception, "entrez un email valide");
-		
+
 	}
 
 	private void validerPrenom(UtilisateurBO utilisateur, BusinessException exception) {
@@ -81,17 +81,28 @@ public class InscriptionUtilisateurValidator {
 
 	private void validerPseudo(UtilisateurBO utilisateur, BusinessException exception) {
 		validerString(utilisateur.getPseudo(), 20, exception, "Pseudo Invalide");
-		
+
 	}
-	
 
 	public UtilisateurBO connecterUtilisateur(String motDePasse, String identifiant) throws BusinessException {
+		BusinessException exception = new BusinessException();
 		UtilisateurBO utilisateurIHM = new UtilisateurBO();
-		/* Validation du champ identifiant. */
-		validationIdentifiant(identifiant);
 
+		/* Validation du champ identifiant. */
+		validationIdentifiant(identifiant, exception);
+		validationMotDePasse(motDePasse, exception);
+		
+		if(!exception.getListeCodesErreur().isEmpty()) {
+			throw exception;
+		}
+		
 		if (identifiant.contains("@")) {
-			validationEmail(identifiant);
+			
+			validationEmail(identifiant, exception);
+			
+			if(!exception.getListeCodesErreur().isEmpty()) {
+				throw exception;
+			}
 
 			utilisateurIHM.setEmail(identifiant);
 		} else {
@@ -99,7 +110,6 @@ public class InscriptionUtilisateurValidator {
 			utilisateurIHM.setPseudo(identifiant);
 		}
 
-		validationMotDePasse(motDePasse);
 		utilisateurIHM.setMotDePasse(motDePasse);
 
 		/* Initialisation du résultat global de la validation. */
@@ -112,15 +122,17 @@ public class InscriptionUtilisateurValidator {
 		} else if (utilisateurIHM.getPseudo() != null) {
 			pseudoEmail = utilisateurIHM.getPseudo();
 		}
+		if (exception.getListeCodesErreur().isEmpty()) {
+			UtilisateurPseudoEmailEnBDD = utilisateurDAO.verifConnection(pseudoEmail, motDePasse);
+			return UtilisateurPseudoEmailEnBDD;
+		}
+		throw exception;
 
-		UtilisateurPseudoEmailEnBDD = utilisateurDAO.verifConnection(pseudoEmail, motDePasse);
-
-		return UtilisateurPseudoEmailEnBDD;
 	}
 
-	private void validationIdentifiant(String identifiant) throws BusinessException {
+	private void validationIdentifiant(String identifiant, BusinessException exception) throws BusinessException {
 		if (identifiant == null || identifiant.trim().isEmpty()) {
-			throw new BusinessException("identifiant non valide");
+			exception.ajouterErreur("identifiant non valide");
 		}
 
 	}
@@ -128,22 +140,18 @@ public class InscriptionUtilisateurValidator {
 	/**
 	 * Valide l'adresse email saisie.
 	 */
-	private void validationEmail(String email) throws BusinessException {
+	private void validationEmail(String email, BusinessException exception) throws BusinessException {
 		if (email != null && !email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-			throw new BusinessException("Merci de saisir une adresse mail valide.");
+			exception.ajouterErreur("Merci de saisir une adresse mail valide.");
 		}
 	}
 
 	/**
 	 * Valide le mot de passe saisi.
 	 */
-	private void validationMotDePasse(String motDePasse) throws BusinessException {
-		if (motDePasse != null) {
-			if (motDePasse.length() < 3 || motDePasse.length() > 15) {
-				throw new BusinessException("Le mot de passe doit contenir au moins 3 caractères.");
-			}
-		} else {
-			throw new BusinessException("Merci de saisir votre mot de passe.");
+	private void validationMotDePasse(String motDePasse, BusinessException exception) throws BusinessException {
+		if (motDePasse == null || !(motDePasse.length() > 3 && motDePasse.length() < 15)) {
+			exception.ajouterErreur("Le mot de passe doit contenir entre 3 et 15 caractères");	
 		}
 	}
 
