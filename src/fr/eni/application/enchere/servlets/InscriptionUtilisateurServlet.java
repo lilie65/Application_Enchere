@@ -3,6 +3,7 @@ package fr.eni.application.enchere.servlets;
 import java.io.IOException;
 import java.nio.charset.CoderResult;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -49,9 +50,9 @@ public class InscriptionUtilisateurServlet extends HttpServlet {
 		String nom;
 		String prenom;
 		String email;
-		int telephone;
+		int telephone = 0;
 		String rue;
-		int code_postal;
+		int code_postal = 0;
 		String ville;
 		String mot_de_passe;
 		UtilisateurBO utilisateurBO = null;
@@ -60,9 +61,18 @@ public class InscriptionUtilisateurServlet extends HttpServlet {
 			nom = request.getParameter("nom");
 			prenom = request.getParameter("prenom");
 			email = request.getParameter("email");
-			telephone = Integer.parseInt(request.getParameter("telephone"));
+			
+			try {
+				code_postal = Integer.parseInt(request.getParameter("code_postal"));
+				telephone = Integer.parseInt(request.getParameter("telephone"));
+			} catch (NumberFormatException e) {
+				request.setAttribute("errors", Arrays.asList("un nombre est nécessaire pour les champs : Téléphone, Code postal"));
+				RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
+				rd.forward(request, response);
+				return;
+			}
+			
 			rue = request.getParameter("rue");
-			code_postal = Integer.parseInt(request.getParameter("code_postal"));
 			ville = request.getParameter("ville");
 			mot_de_passe = request.getParameter("mot_de_passe");
 			utilisateurBO = new UtilisateurBO(pseudo, nom, prenom, email, telephone, rue, code_postal,
@@ -70,15 +80,16 @@ public class InscriptionUtilisateurServlet extends HttpServlet {
 			request.setAttribute("utilisateurBO", utilisateurBO);
 			InscriptionUtilisateurValidator inscriptionValidator = new InscriptionUtilisateurValidator();
 			inscriptionValidator.validerUtilisateurBo(utilisateurBO);
-
-		} catch (NumberFormatException | BusinessException e) {
-			List<Integer> listeCodesErreur = new ArrayList<>();
-			request.setAttribute("error", listeCodesErreur);
-		}
-		HttpSession session = request.getSession();
-
-		session.setAttribute(ATT_SESSION_USER, utilisateurBO);
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateurJSP.jsp").forward(request, response);
+			HttpSession session = request.getSession();
+			session.setAttribute(ATT_SESSION_USER, utilisateurBO);
+			request.getRequestDispatcher("/WEB-INF/jsp/utilisateurJSP.jsp").forward(request, response);
+		} catch (BusinessException e) {
+			request.setAttribute("errors", e.getListeCodesErreur());
+			RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
+			rd.forward(request, response);
+			
+		}	
+		
 	}
 
 }

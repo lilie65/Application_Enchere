@@ -1,28 +1,68 @@
-#formulaire{
-	
+/*header*/
+.flex {
+	display: flex;
 }
-form{
-	display:flex;
-	 justify-content: center;
-	 
+
+.logo {
+	margin-top: 10px;
+	width: 70px;
+	height: 70px;
+	border-radius: 70px;
 }
-.flexbox{
-	display:flex;
-	justify-content: space-between;
-	margin:10px;
-}
-.orientation{
-	width: auto;
-}
-h2{
+/*les H*/
+h2 {
 	text-align: center;
 }
-input{
-	 height: 20px;
-  	width: 130px;
 
+h1 {
+	margin-left: 10px;
 }
-.button{
-	width:170px;
+
+/*article formulaire*/
+.form {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 150px;
+	padding:90px;
+}
+.border{
+	border: 1px solid grey;
+	padding:50px;
+}
+
+.flexbox {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
+	width:400px;
+}
+.column{
+	display:flex;
+	flex-direction: column;
+}
+
+.orientation {
+	width: auto;
+}
+
+input {
+	height: 20px;
+	width: 140px;
+}
+
+.button {
+	width: 170px;
 	height: 40px;
+}
+/*footer*/
+footer {
+	padding-bottom: 30px;
+	text-align: center;
+	background-color: #212f56;
+	padding: auto;
+	padding-top: 50px;
+}
+
+.legale {
+	color: white;
 }

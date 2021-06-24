@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.application.enchere.BusinessException;
-import fr.eni.application.enchere.bll.ConnexionUtilisateur;
+import fr.eni.application.enchere.bll.InscriptionUtilisateurValidator;
 import fr.eni.application.enchere.bo.UtilisateurBO;
 
 /**
@@ -39,7 +39,7 @@ public class ConnexionServlet extends HttpServlet {
 		String motDePasse = getValeurChamp(request, CHAMP_PASS);
 		String identifiant = getValeurChamp(request, CHAMP_IDENTIFIANT);
 		/* Préparation de l'objet formulaire */
-		ConnexionUtilisateur form = new ConnexionUtilisateur();
+		InscriptionUtilisateurValidator form = new InscriptionUtilisateurValidator();
 
 		/* Traitement de la requête et récupération du bean en résultant */
 		UtilisateurBO utilisateur;
@@ -62,11 +62,10 @@ public class ConnexionServlet extends HttpServlet {
 			}
 				
 		} catch (BusinessException e) {
-			request.setAttribute("error", e.getMessage());
+			request.setAttribute("error", "nom d'utilisateur ou mot de  passe incorrecte");
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 
-		
 	}
 
 	/*

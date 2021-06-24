@@ -10,7 +10,9 @@ import fr.eni.application.enchere.bo.UtilisateurBO;
 public class UtilisateursDAOImpl implements UtilisateursDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String SELECT = "select no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur from utilisateurs where no_utilisateur= ?";
+	private static final String Update = "update utilisateurs set  pseudo =?,prenom =?, email = ?, telephone = ?,rue= ? ,code_postal = ?, credit = ? where no_utilisateur = ?";
 	private static final String verifConnection = "select no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,credit,administrateur from utilisateurs where (pseudo = ? or email = ?) AND mot_de_passe = ?";
+	BusinessException businessException = new BusinessException();
 
 	@Override
 	public UtilisateurBO select(int idUtilisateur) throws BusinessException {
@@ -35,7 +37,7 @@ public class UtilisateursDAOImpl implements UtilisateursDAO {
 				utilisateur.setAdmnistrateur(rs.getBoolean("administrateur"));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			businessException.ajouterErreur("echec de la selection");
 		}
 		return utilisateur;
 	}
@@ -62,16 +64,22 @@ public class UtilisateursDAOImpl implements UtilisateursDAO {
 				utilisateurs.setNoUtilisateur(rs.getInt(1));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			if (e.getMessage().contains("CK_AVIS_note")) {
-				businessException.ajouterErreur("Insertion de l'utilisateur impossible");
-			} else {
-				businessException.ajouterErreur("Echec objet nulle");
+			if (e.getMessage().contains("Duplicate")) {
+				businessException.ajouterErreur("l'email ou le pseudo de l'utilisateur existe déja");
+				throw businessException;
 			}
+			businessException.ajouterErreur(e.getMessage());
 			throw businessException;
 		}
+
 	}
+
+
+//	public void update(UtilisateurBO utilisateurs) throws BusinessException {
+//		try (Connection cnx = ConnectionProvider.getConnection()) {
+//			PreparedStatement pstmt = cnx.prepareStatement(Update, PreparedStatement.RETURN_GENERATED_KEYS);
+//			
+//	}
 
 	public void UtilisateurBO() {
 		// TODO Auto-generated method stub
